@@ -33,12 +33,17 @@ class LinkedList {
     printList() {
         const resultArr = [];
         let currentNode = this.head;
+        if (this.length === 0) {
+            console.log(resultArr);
+            return undefined;
+        }
         while (currentNode.next !== null) {
             resultArr.push(currentNode.value);
             currentNode = currentNode.next;
         }
         resultArr.push(this.tail.value);
-        console.log(resultArr); 
+        console.log(resultArr);
+        return undefined;
     }
 
     traverse(index) {
@@ -78,15 +83,29 @@ class LinkedList {
     }
 
     remove(index) {
+        if (index >= this.length) {
+            console.log('The index exceeds the length of linked list');
+            return undefined;
+        }
+        // if removing head
+        if (index === 0) {
+            // set the head to head's next node
+            this.head = this.head.next;
+        }
+        else {
         // traverse to the previous index location
         let previousNode = this.traverse(index - 1);
         // node about to remove
         let removingNode = previousNode.next;
         // set previousNode's next to nextNode
         previousNode.next = removingNode.next;
+        // if removing tail: set tail
+        if (index === this.length - 1) {
+           this.tail = previousNode; 
+        }
+        }
         // decrease length
         this.length--;
-        // return
         return this;
     }
 
@@ -118,7 +137,10 @@ newLinkedList.append(3);
 newLinkedList.append(4);
 newLinkedList.prepend(1);
 newLinkedList.insert(0, 0);
-newLinkedList.remove(1);
+newLinkedList.printList();
+newLinkedList.remove(4);
+newLinkedList.remove(3);
+newLinkedList.remove(0);
 newLinkedList.reverse();
 newLinkedList.printList();
 
