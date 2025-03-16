@@ -73,6 +73,18 @@ class DoubleLinkedList {
         return currentNode;
     }
 
+    reverse_traverse(index) {
+        let indexLoc = this.length - 1;
+        let currentNode = this.tail;
+        if (index > this.length - 1) {
+            return undefined;
+        }
+        while (indexLoc > index) {
+            currentNode = currentNode.prev;
+            indexLoc--;
+        }
+        return currentNode;
+    }
 
     insert(index, value) {
         // if index === 0, prepend
