@@ -58,7 +58,7 @@ class LinkedList {
         // if index === 0, prepend
         if (index === 0) {
             this.prepend(value);
-            return;
+            return this;
         }
 
         // traverse to the index location - 1
@@ -69,6 +69,10 @@ class LinkedList {
         newNode.next = currentNode.next;
         // index location - 1's next = new node
         currentNode.next = newNode
+        // increment length;
+        this.length++;
+        // return
+        return this;
         // 1 ->            3 -> 4
         //      2 ->
     }
@@ -82,6 +86,8 @@ class LinkedList {
         previousNode.next = removingNode.next;
         // decrease length
         this.length--;
+        // return
+        return this;
     }
 
     _reverse(current_node, previous_node) {
