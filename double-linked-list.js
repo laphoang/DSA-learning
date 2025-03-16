@@ -8,7 +8,7 @@ class Node {
     }
 }
 
-class LinkedList {
+class DoubleLinkedList {
     constructor(value) {
         this.head = new Node(value);
         this.tail = this.head;
@@ -47,12 +47,17 @@ class LinkedList {
     printList() {
         const resultArr = [];
         let currentNode = this.head;
+        if (this.length === 0) {
+            console.log(resultArr);
+            return undefined;
+        }
         while (currentNode.next !== null) {
             resultArr.push(currentNode.value);
             currentNode = currentNode.next;
         }
         resultArr.push(this.tail.value);
-        console.log(resultArr); 
+        console.log(resultArr);
+        return undefined;
     }
 
     traverse(index) {
@@ -94,6 +99,16 @@ class LinkedList {
     }
 
     remove(index) {
+        if (index >= this.length) {
+            console.log('The index exceeds the length of linked list');
+            return undefined;
+        }
+        // if removing head
+        if (index === 0) {
+            // set the head to head's next node
+            this.head = this.head.next;
+        }
+        else {
         // traverse to the previous index location
         let previousNode = this.traverse(index - 1);
         // node about to remove
@@ -102,22 +117,34 @@ class LinkedList {
         let nextNode = removingNode.next;
         // set previousNode's next to nextNode
         previousNode.next = removingNode.next;
+        if (index === this.length - 1) {
+            // set tail
+            this.tail = previousNode;
+        }
+        else {
         // set nextNode's prev to previousNode
-        nextNode.prev = previousNode; 
+        nextNode.prev = previousNode;
+        }
+        }
         // decrease length
         this.length--;
         return this;
     }
     }
 
-const newLinkedList = new LinkedList(1);
+const newLinkedList = new DoubleLinkedList(1);
 newLinkedList.append(2);
 newLinkedList.append(3);
 newLinkedList.prepend(0);
-console.log(newLinkedList);
 console.log('---------');
 console.log(newLinkedList.traverse(0));
 console.log('---------');
 console.log(newLinkedList.traverse(1));
+console.log('---------');
+newLinkedList.remove(0);
+console.log('---------');
+newLinkedList.remove(2);
+console.log('---------');
+newLinkedList.printList();
 
 
