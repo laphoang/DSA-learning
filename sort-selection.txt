@@ -1,0 +1,123 @@
+                   ┌────────── Start ──────────┐
+                   │                           │
+                   ▼                           ▼
+      Is the dataset small?              Is the dataset large?
+       (n < 100 elements)                (n > 10,000 elements)
+                   │                           │
+                   ▼                           ▼
+       Almost sorted?                   Do you need a stable sort?
+       (Few new elements,                (Preserve order of equal elements?)
+        mostly sorted data)                    │       │
+        │         │                            ▼       ▼
+        ▼         ▼                         ✅ Merge Sort
+ ✅ Insertion Sort   ❌ No →            (Best for large stable sorting)
+ (Best for small,      │                     │
+  nearly sorted data)  ▼                     ▼
+               External Sorting?        Is the data random?
+               (Data too large for        (Unsorted, no pattern)
+                memory, must use disk)        │      │
+                   │                          ▼      ▼
+                   ▼                     ✅ Quick Sort    ✅ Heap Sort
+          ✅ Merge Sort                  (Great for large  (Best for O(n log n)
+       (Handles huge datasets)            in-memory data)   worst-case performance)
+                   │
+                   ▼
+       Sorting a Linked List?
+          (No random access)  
+                   │
+                   ▼
+         ✅ Merge Sort  
+ (Efficient for linked lists)
+
+
+ Here's a quick guide on when to use each sorting algorithm:  
+
+### **1. Insertion Sort**  
+✅ **Best for:**  
+- Small datasets  
+- Nearly sorted data (adaptive)  
+- When simplicity matters  
+
+❌ **Avoid when:**  
+- Large datasets (O(n²) worst-case time complexity)  
+
+---
+
+### **2. Quick Sort**  
+✅ **Best for:**  
+- General-purpose sorting (good average-case time complexity: O(n log n))  
+- Large, random datasets  
+- When in-place sorting is needed (space complexity: O(log n))  
+
+❌ **Avoid when:**  
+- Stability is required (it’s not stable by default)  
+- Worst-case performance (O(n²) for nearly sorted or unbalanced pivot choices)  
+
+---
+
+### **3. Merge Sort**  
+✅ **Best for:**  
+- Large datasets that don’t fit in memory (external sorting)  
+- When stability is required (preserves order of equal elements)  
+- Sorting linked lists (doesn’t require random access)  
+
+❌ **Avoid when:**  
+- In-place sorting is needed (uses extra memory: O(n))  
+
+---
+
+### **4. Heap Sort**  
+✅ **Best for:**  
+- Priority queues  
+- When worst-case O(n log n) sorting is needed  
+- Sorting data in-place  
+
+❌ **Avoid when:**  
+- Stability is needed (not stable)  
+- Simplicity is preferred (harder to implement than Quick Sort)  
+
+---
+
+### **5. Counting Sort**  
+✅ **Best for:**  
+- Small range of integers (O(n + k), where k is the max number)  
+- Large datasets with a limited range (e.g., exam scores, ages)  
+
+❌ **Avoid when:**  
+- Floating-point numbers, negative numbers, or large ranges (requires excessive memory)  
+
+---
+
+### **6. Radix Sort**  
+✅ **Best for:**  
+- Large numbers (integers, strings) within a known range  
+- When Counting Sort works but numbers are too large  
+
+❌ **Avoid when:**  
+- Floating-point numbers or complex comparisons  
+- When O(n log n) sorting is faster due to memory constraints  
+
+---
+
+### **7. Bubble Sort & Selection Sort**  
+✅ **Best for:**  
+- **Teaching sorting concepts** (simple and easy to understand)  
+- Very small datasets  
+
+❌ **Avoid when:**  
+- Any real-world large dataset (O(n²) is too slow)  
+
+---
+
+
+### **Quick Cheat Sheet:**  
+| **Scenario**                          | **Best Sorting Algorithm**            |  
+|---------------------------------------|---------------------------------------|  
+| Small dataset                         | Insertion Sort                        |  
+| Large, random data                    | Quick Sort                            |  
+| Stability needed                      | Merge Sort                            |  
+| External sorting (huge data)          | Merge Sort                            |  
+| Sorting priority queues               | Heap Sort                             |  
+| Integer sorting with small range      | Counting Sort                         |  
+| Integer sorting with a large range    | Radix Sort                            |  
+| Teaching sorting                      | Bubble/Selection Sort                 |
